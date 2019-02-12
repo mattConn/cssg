@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 {
 	if(argc == 1)
 	{
-		printf("No filepath argument.\n");
+		fprintf(stderr, "No filepath argument.\n");
 		return 1;
 	}
 

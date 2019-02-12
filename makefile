@@ -5,7 +5,7 @@ $(BIN) : main.c
 	$(CC) $^ -o $@
 
 check:
-	./$(BIN) test.txt
+	./$(BIN) testfiles/test.txt
 
 clean:
 	rm $(BIN)
