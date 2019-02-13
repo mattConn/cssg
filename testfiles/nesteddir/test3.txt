@@ -1,0 +1,3 @@
+Here is test3.txt.
+It is a nested file.
+End of test3.

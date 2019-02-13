@@ -1,2 +1,3 @@
 Here is test 2, line 1.
+#include nesteddir/test3.txt
 Last line of test 2.
