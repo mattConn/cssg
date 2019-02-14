@@ -6,20 +6,30 @@
 
 int main(int argc, char *argv[])
 {
+	// if no file arg
 	if(argc == 1)
 	{
 		fprintf(stderr, "** ERROR: No filepath argument.\n");
 		return 1;
 	}
 
-	if(getfiledir(argv[1])) changedir( getfiledir(argv[1]) );
+	// if path contains directories, get file from path
+	char *filedir = getfiledir(argv[1]);
+	if(filedir) changedir(filedir);
 
-	basedir = getcwd(cwd, sizeof(cwd));
+	// expand path
+	realpath(argv[0], cwd);
 
-	if( strrchr(argv[1], '/') )
-		openfile( strrchr(argv[1], '/')+1);
+	// set base directory
+	basedir = getfiledir(cwd);
+
+	if(filedir)
+		openfile(strrchr(argv[1], '/')+1); // open file by name at end of path
 	else
 		openfile(argv[1]);
+
+	// uses strndup; must be freed
+	free(filedir);
 
 	return 0;
 }

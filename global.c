@@ -74,10 +74,7 @@ bool openfile(const char *filepath)
 
 	free(line);
 
-	printf("BDIR: %s\n", basedir);
-	printf("CDIR: %s\n", getcwd(cwd, sizeof(cwd)));
 	changedir(basedir); // return to base directory
-	printf("CDIR2: %s\n", getcwd(cwd, sizeof(cwd)));
 
 	return true;
 }
