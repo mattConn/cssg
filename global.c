@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "global.h"
 
+// file include directive
 char directive[] = "#include";
 
 // get file dir from file path (uses stringdup; must be freed)
@@ -23,28 +24,10 @@ void changedir(const char *filepath)
 		fprintf(stderr, "** ERROR: Could not change to directory `%s`.\n", filepath);
 }
 
-bool openfile(const char *filepath)
+// open and parse file lines
+bool parsefile(const char *filepath)
 {
-	FILE *fp;
-
-	// if directory in filepath
-
-	char *filedir = getfiledir(filepath);
-	if(filedir)	
-	{
-
-		if( chdir(filedir) < 0) // change to directory
-		{
-			fprintf(stderr, "** ERROR: Could not open directory `%s.`\n", filedir);
-			free(filedir);
-			return false;
-		}
-			free(filedir);
-			fp = fopen( strchr(filepath, '/')+1, "r" );
-	}
-	else
-		fp = fopen(filepath, "r");
-
+	FILE *fp = fopen(filepath, "r");
 
 	// file open failure
 	if(!fp)
@@ -66,7 +49,7 @@ bool openfile(const char *filepath)
 				line[strlen(line)-1] = '\0';
 
 			char *filename = strchr(line, ' '); // last token (filepath)
-			openfile(filename+1);
+			parsefile(filename+1);
 		}
 		else
 			printf("%s", line); // no direcitve, just print

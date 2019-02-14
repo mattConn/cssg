@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include "global.h"
@@ -24,9 +23,9 @@ int main(int argc, char *argv[])
 	basedir = getfiledir(cwd);
 
 	if(filedir)
-		openfile(strrchr(argv[1], '/')+1); // open file by name at end of path
+		parsefile(strrchr(argv[1], '/')+1); // open file by name at end of path
 	else
-		openfile(argv[1]);
+		parsefile(argv[1]);
 
 	// uses strndup; must be freed
 	free(filedir);
