@@ -42,9 +42,12 @@ bool parsefile(const char *filepath)
 	// if markdown file, hand to markdown processor
 	if(strcmp(fext, ".md") == 0)
 	{
+		// check for markdown processor spec
+		markdownp = markdownp ? markdownp : "markdown";
+
 		// markdown command
 		char mdcmd[50];
-		sprintf(mdcmd, "markdown %s", filepath);
+		sprintf(mdcmd, "%s %s", markdownp, filepath);
 
 		FILE *md = popen(mdcmd, "r");
 

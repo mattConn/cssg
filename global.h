@@ -11,3 +11,6 @@ void changedir(const char *filepath);
 
 // parse file lines
 bool parsefile(const char *filepath);
+
+// markdown processor
+char *markdownp;
