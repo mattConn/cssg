@@ -36,6 +36,27 @@ bool parsefile(const char *filepath)
 		return false;
 	}
 
+	// get file extension
+	char *fext = strrchr(filepath, '.');
+
+	// if markdown file, hand to markdown processor
+	if(strcmp(fext, ".md") == 0)
+	{
+		// markdown command
+		char mdcmd[50];
+		sprintf(mdcmd, "markdown %s", filepath);
+
+		FILE *md = popen(mdcmd, "r");
+
+		// write characters to stdout
+		char c;
+		while((c = fgetc(md)) != EOF) fputc(c, stdout);
+
+		pclose(md);
+
+		return true;
+	}
+
 	// check file lines for directive
 
 	char *line = NULL;
@@ -55,7 +76,9 @@ bool parsefile(const char *filepath)
 			printf("%s", line); // no direcitve, just print
 	}
 
+	// cleanup
 	free(line);
+	fclose(fp);
 
 	changedir(basedir); // return to base directory
 
