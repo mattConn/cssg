@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "global.h"
+#include "parsefile.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,10 +16,12 @@ int main(int argc, char *argv[])
 	// path of file to parse
 	char *filepath;
 
+	// parse args
+	//===========
+
 	// arg index
 	int i = 1;
 
-	// parse args
 	for(; i < argc; i++)
 	{
 		// if flag is found
@@ -46,7 +49,10 @@ int main(int argc, char *argv[])
 		// treat non-flag as filepath
 		else
 			filepath = argv[i];
-	} // end parse args
+	}
+
+	// ==============
+	// end parse args
 
 	// if no file arg
 	if(!filepath)
@@ -65,6 +71,10 @@ int main(int argc, char *argv[])
 	// set base directory
 	basedir = getfiledir(cwd);
 
+	// define include directive
+	directive = "#include";
+
+	// parse file
 	if(filedir)
 		parsefile(strrchr(filepath, '/')+1); // open file by name at end of path
 	else

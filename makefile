@@ -1,7 +1,7 @@
 CC = gcc
 BIN = cssg
 
-$(BIN) : main.c global.c
+$(BIN) : main.c global.c parsefile.c
 	$(CC) $^ -o $@
 
 check:

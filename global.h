@@ -9,8 +9,8 @@ char *getfiledir(const char *filepath);
 // unistd chdir wrapper
 void changedir(const char *filepath);
 
-// parse file lines
-bool parsefile(const char *filepath);
-
 // markdown processor
 char *markdownp;
+
+// include directive
+char *directive;
