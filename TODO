@@ -1,4 +1,7 @@
 - include args
 - line count, filename on error
+- runtime args
+	- set directive delimiter
+	- set arg delimiter
 - directives
 	- exec
