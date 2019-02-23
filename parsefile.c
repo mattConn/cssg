@@ -53,7 +53,7 @@ bool parsefile(const char *filepath)
 			if(line[strlen(line)-1] == '\n') // chomp
 				line[strlen(line)-1] = '\0';
 
-			char *filename = strchr(line, ' '); // last token (filepath)
+			char *filename = strchr(line, ' '); // second token (filepath)
 			parsefile(filename+1);
 		}
 		else

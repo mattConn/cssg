@@ -5,3 +5,7 @@
 	- set arg delimiter
 - directives
 	- exec
+- compile time defines
+	- basedir
+	- max file args
+	- max file arg length
