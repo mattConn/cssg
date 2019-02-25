@@ -9,6 +9,10 @@
 // open and parse file lines
 bool parsefile(const char *filepath, const strstack *fileargs)
 {
+	// TEMP
+	if(fileargs)
+		for(int i=0; i<fileargs->count; i++) printf("APASSED: %s\n", fileargs->arr[i]);
+
 	FILE *fp = fopen(filepath, "r");
 
 	// file open failure
@@ -67,7 +71,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 				pushsstack(&argstack, tok);
 				tok = strtok(NULL, " ");
 			}
-			parsefile(filename+1, NULL);
+			parsefile(filename+1, &argstack);
 
 			freesstack(&argstack);
 		}
