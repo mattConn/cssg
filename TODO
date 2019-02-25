@@ -1,10 +1,22 @@
 - include args X
+- verbose include args (token delim ", ")
 - line count, filename on error
+- allow leading character on directive
+- Documentation:
+	- table of compile time, runtime defines. compile time > runtime
 - runtime args
+	- direct file write (not stdout)
+	- basedir
 	- set directive delimiter
 	- set arg delimiter
+	- quiet mode (suppress warn)
+	- generate site map
+	- max recursive includes
 - directives
 	- exec
 - compile time defines
 	- basedir
 	- max file args
+	- set directive delimiter
+	- set arg delimiter
+	- max recursive includes

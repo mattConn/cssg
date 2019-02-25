@@ -101,7 +101,6 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 	// cleanup
 	free(line);
 	fclose(fp);
-	printf("FCLOSE\n");
 
 	changedir(basedir); // return to base directory
 
