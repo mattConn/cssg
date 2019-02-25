@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "global.h"
+#include "strstack.h"
 #include "parsefile.h"
 
 // open and parse file lines
@@ -53,8 +54,21 @@ bool parsefile(const char *filepath)
 			if(line[strlen(line)-1] == '\n') // chomp
 				line[strlen(line)-1] = '\0';
 
+
 			char *filename = strchr(line, ' '); // second token (filepath)
+
+			strstack argstack;
+			initsstack(&argstack);
+			char *tok = strtok(line, " ");
+			tok = strtok(NULL, " ");
+			while(tok)
+			{
+				pushsstack(&argstack, tok);
+				tok = strtok(NULL, " ");
+			}
 			parsefile(filename+1);
+
+			freesstack(&argstack);
 		}
 		else
 			printf("%s", line); // no direcitve, just print
