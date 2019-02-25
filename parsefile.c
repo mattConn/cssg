@@ -9,15 +9,6 @@
 // open and parse file lines
 bool parsefile(const char *filepath, const strstack *fileargs)
 {
-	FILE *fp = fopen(filepath, "r");
-
-	// file open failure
-	if(!fp)
-	{
-		fprintf(stderr, "** ERROR: Could not open file `%s`.\n", filepath);
-		return false;
-	}
-
 	// get file extension
 	char *fext = strrchr(filepath, '.');
 
@@ -40,6 +31,17 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 		pclose(md);
 
 		return true;
+	}
+
+	// open file
+	FILE *fp = fopen(filepath, "r");
+
+	// file open failure
+	if(!fp)
+	{
+		fprintf(stderr, "** ERROR: Could not open file `%s`.\n", filepath);
+		fclose(fp);
+		return false;
 	}
 
 	// check file lines for directive
@@ -94,11 +96,12 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 		}
 		else
 			printf("%s", line); // no direcitve, just print
-	}
+	} // end getline routine
 
 	// cleanup
 	free(line);
 	fclose(fp);
+	printf("FCLOSE\n");
 
 	changedir(basedir); // return to base directory
 
