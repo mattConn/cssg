@@ -61,6 +61,7 @@ bool parsefile(const char *filepath)
 			initsstack(&argstack);
 			char *tok = strtok(line, " ");
 			tok = strtok(NULL, " ");
+			tok = strtok(NULL, " ");
 			while(tok)
 			{
 				pushsstack(&argstack, tok);
