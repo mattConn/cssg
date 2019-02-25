@@ -1,6 +1,6 @@
 this is line 1
 this is line 2
-#include test2.txt
+#include test2.txt foo bar baz
 And lastly, line 3 of test.txt
 #include test.md
 #include test4.txt

@@ -3,10 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "global.h"
+#include "strstack.h"
 #include "parsefile.h"
 
 // open and parse file lines
-bool parsefile(const char *filepath)
+bool parsefile(const char *filepath, const strstack *fileargs)
 {
 	FILE *fp = fopen(filepath, "r");
 
@@ -53,8 +54,40 @@ bool parsefile(const char *filepath)
 			if(line[strlen(line)-1] == '\n') // chomp
 				line[strlen(line)-1] = '\0';
 
+
 			char *filename = strchr(line, ' '); // second token (filepath)
-			parsefile(filename+1);
+
+			strstack argstack;
+			initsstack(&argstack);
+			char *tok = strtok(line, " ");
+			tok = strtok(NULL, " ");
+			tok = strtok(NULL, " ");
+			while(tok)
+			{
+				pushsstack(&argstack, tok);
+				tok = strtok(NULL, " ");
+			}
+			parsefile(filename+1, &argstack);
+
+			freesstack(&argstack);
+		}
+		// no directive, check for fileargs
+		else if(fileargs && fileargs->count > 0)
+		{
+			for(int i=0; i < strlen(line); i++)
+			{
+				if(line[i] == '$') // arg delimiter
+				{
+					int argnum = line[++i] - '0';
+					if(argnum <= fileargs->count && argnum > 0) // if num is within arg arr. bounds
+						printf("%s", fileargs->arr[argnum-1]);
+					else // bad arg/not an arg, print delim and current char
+						printf("%c%c", '$',line[i]);
+					
+				}
+				else // no arg delim, print char
+					printf("%c", line[i]);
+			}
 		}
 		else
 			printf("%s", line); // no direcitve, just print

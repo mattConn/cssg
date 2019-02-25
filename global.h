@@ -1,3 +1,6 @@
+#ifndef GLOBAL_H
+#define GLOBAL_H 
+
 typedef enum Bool { false, true } bool;
 
 char cwd[256]; // chdir buf
@@ -14,3 +17,5 @@ char *markdownp;
 
 // include directive
 char *directive;
+
+#endif
