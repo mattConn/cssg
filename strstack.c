@@ -4,12 +4,17 @@
 #include <stdio.h>
 #include <string.h>
 
+// stack of dynamically allocated strings
+//=======================================
+
+// init stack
 bool initsstack(strstack *ss)
 {
 	ss->count = 0;
 	for(int i = 0; i < MAX_STACK; i++) ss->arr[i] = NULL; 
 }
 
+// push onto stack
 bool pushsstack(strstack *ss, char *str)
 {
 	if(ss->count < MAX_STACK)
@@ -26,6 +31,7 @@ bool pushsstack(strstack *ss, char *str)
 	return false;
 }
 
+// free all strings on heap
 void freesstack(strstack *ss)
 {
 	int i = 0;
