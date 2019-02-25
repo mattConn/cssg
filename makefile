@@ -1,8 +1,10 @@
 CC = gcc
 BIN = cssg
+# no def. flags; pass as cli arg
+FLAGS = 
 
 $(BIN) : main.c global.c parsefile.c strstack.c
-	$(CC) $^ -o $@
+	$(CC) $^ $(FLAGS) -o $@
 
 check:
 	./$(BIN) testfiles/test.txt

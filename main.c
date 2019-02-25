@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
 
 	// uses strndup; must be freed
 	free(filedir);
+	free(basedir);
 
 	return 0;
 }
