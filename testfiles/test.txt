@@ -1,5 +1,7 @@
+# This is a comment
 this is line 1
 this is line 2
+#this is also a comment
 #include test2.txt foo bar baz
 And lastly, line 3 of test.txt
 #include test.md

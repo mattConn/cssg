@@ -73,7 +73,12 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 
 			freesstack(&argstack);
 		}
-		// no directive, check for fileargs
+		// no directive:
+
+		// check if comment
+		else if(line[0] == '#')
+		{/*do nothing*/}
+		//  check for fileargs
 		else if(fileargs && fileargs->count > 0)
 		{
 			for(int i=0; i < strlen(line); i++)
