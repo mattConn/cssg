@@ -1,3 +1,6 @@
+#ifndef STRSTACK_H
+#define STRSTACK_H
+
 #include "global.h"
 
 // stack of dynamically allocated strings
@@ -22,3 +25,5 @@ bool pushsstack(strstack *ss, char *str);
 
 // free all strings on heap
 void freesstack(strstack *ss);
+
+#endif

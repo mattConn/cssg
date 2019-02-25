@@ -7,7 +7,7 @@
 #include "parsefile.h"
 
 // open and parse file lines
-bool parsefile(const char *filepath)
+bool parsefile(const char *filepath, const strstack *fileargs)
 {
 	FILE *fp = fopen(filepath, "r");
 
@@ -67,7 +67,7 @@ bool parsefile(const char *filepath)
 				pushsstack(&argstack, tok);
 				tok = strtok(NULL, " ");
 			}
-			parsefile(filename+1);
+			parsefile(filename+1, NULL);
 
 			freesstack(&argstack);
 		}

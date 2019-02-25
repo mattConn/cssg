@@ -76,9 +76,9 @@ int main(int argc, char *argv[])
 
 	// parse file
 	if(filedir)
-		parsefile(strrchr(filepath, '/')+1); // open file by name at end of path
+		parsefile(strrchr(filepath, '/')+1, NULL); // open file by name at end of path
 	else
-		parsefile(filepath);
+		parsefile(filepath, NULL);
 
 	// uses strndup; must be freed
 	free(filedir);
