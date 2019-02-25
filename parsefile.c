@@ -9,10 +9,6 @@
 // open and parse file lines
 bool parsefile(const char *filepath, const strstack *fileargs)
 {
-	// TEMP
-	if(fileargs)
-		for(int i=0; i<fileargs->count; i++) printf("APASSED: %s\n", fileargs->arr[i]);
-
 	FILE *fp = fopen(filepath, "r");
 
 	// file open failure
@@ -74,6 +70,24 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 			parsefile(filename+1, &argstack);
 
 			freesstack(&argstack);
+		}
+		// no directive, check for fileargs
+		else if(fileargs && fileargs->count > 0)
+		{
+			for(int i=0; i < strlen(line); i++)
+			{
+				if(line[i] == '$') // arg delimiter
+				{
+					int argnum = line[++i] - '0';
+					if(argnum <= fileargs->count && argnum > 0) // if num is within arg arr. bounds
+						printf("%s", fileargs->arr[argnum-1]);
+					else // bad arg/not an arg, print delim and current char
+						printf("%c%c", '$',line[i]);
+					
+				}
+				else // no arg delim, print char
+					printf("%c", line[i]);
+			}
 		}
 		else
 			printf("%s", line); // no direcitve, just print
