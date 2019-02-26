@@ -56,22 +56,57 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 			if(line[strlen(line)-1] == '\n') // chomp
 				line[strlen(line)-1] = '\0';
 
+			char *filename = NULL;
 
-			char *filename = strchr(line, ' '); // second token (filepath)
+			// tokenize line
+			//--------------
 
-			strstack argstack;
-			initsstack(&argstack);
-			char *tok = strtok(line, " ");
-			tok = strtok(NULL, " ");
-			tok = strtok(NULL, " ");
-			while(tok)
+			char *tok = strtok(line, " "); // first tok.: directive
+
+			tok = strtok(NULL, " "); // second tok.: filename
+			if(tok) // check for filename tok
 			{
-				pushsstack(&argstack, tok);
-				tok = strtok(NULL, " ");
+				filename = (char *) malloc(strlen(tok) * sizeof(char));
+				strcpy(filename, tok);
 			}
-			parsefile(filename+1, &argstack);
+			else
+			{
+				fprintf(stdout, "** ERROR: Include directive found but no file specified.\n");
+				return false;
+			}
 
-			freesstack(&argstack);
+
+			tok = strtok(NULL, " "); // third tok.: arg. delim
+
+			if(tok) // if delim tok was found in line
+			{
+				// dynamic string stack for file args
+				strstack argstack;
+				initsstack(&argstack);
+
+				// allocate mem. for delim. token
+				char *argDelim = (char *) malloc(strlen(tok) * sizeof(char));
+				strcpy(argDelim, tok);
+
+				tok = strtok(NULL, argDelim); // fourth tok.: first arg
+				while(tok)
+				{
+					pushsstack(&argstack, tok);
+					tok = strtok(NULL, argDelim);
+				}
+
+				free(argDelim); // frem delim. mem.
+
+				parsefile(filename, &argstack);
+
+				// free dyn str stack
+				freesstack(&argstack);
+			}
+			else
+				parsefile(filename, NULL);
+
+			// clean up
+			free(filename);
 		}
 		// no directive:
 
