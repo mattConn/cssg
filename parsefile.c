@@ -89,8 +89,9 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 				strcpy(argDelim, tok);
 
 				tok = strtok(NULL, argDelim); // fourth tok.: first arg
-				while(tok)
+				while(tok) // store file args
 				{
+					if(tok[0] == ' ') tok++; // ignore single leading whitespace
 					pushsstack(&argstack, tok);
 					tok = strtok(NULL, argDelim);
 				}

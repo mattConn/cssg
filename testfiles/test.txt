@@ -2,7 +2,7 @@
 this is line 1
 this is line 2
 #this is also a comment
-#include test2.txt % This sentence is first arg%Here is arg 2%The last argument
+#include test2.txt , This sentence is first arg,Here is arg 2, The last argument
 And lastly, line 3 of test.txt
 #include test.md
 #include test4.txt
