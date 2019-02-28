@@ -15,10 +15,10 @@ To include files, use `#include /path/to/file` in a document.
 ### Include Arguments
 
 #### String Insertion
-To insert strings in a file, specify strings after an include:
+To insert strings in a file, specify strings after an include. Strings must be separated by a character. If the string separator was `,`, the include would look like:
 
 ```
-#include /path/to/file argSeparator string1 string2 stringN
+#include /path/to/file , string1, string2, stringN
 ```
 
 For example, consider two files `document.txt` and `greeting.txt`, where we want to include `greeting.txt` in `document.txt`:
