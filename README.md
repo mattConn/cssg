@@ -56,5 +56,13 @@ Or, specify the path of the processor:
 $ cssg -m /usr/bin/pandoc path/to/file
 ```
 
+### Comments
+A line can be commented out by starting it with a `#` character:
+
+```
+This line will be written to stdout.
+# This line will not.
+```
+
 ## Building
 Run `make` to compile with gcc. The binary will be `cssg`.
