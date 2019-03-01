@@ -12,25 +12,29 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 	// get file extension
 	char *fext = strrchr(filepath, '.');
 
-	// if markdown file, hand to markdown processor
-	if(strcmp(fext, ".md") == 0)
+	// if filepath has file extension
+	if(fext)
 	{
-		// check for markdown processor spec
-		markdownp = markdownp ? markdownp : "markdown";
+		// if markdown file, hand to markdown processor
+		if(strcmp(fext, ".md") == 0)
+		{
+			// check for markdown processor spec
+			markdownp = markdownp ? markdownp : "markdown";
 
-		// markdown command
-		char mdcmd[50];
-		sprintf(mdcmd, "%s %s", markdownp, filepath);
+			// markdown command
+			char mdcmd[50];
+			sprintf(mdcmd, "%s %s", markdownp, filepath);
 
-		FILE *md = popen(mdcmd, "r");
+			FILE *md = popen(mdcmd, "r");
 
-		// write characters to stdout
-		char c;
-		while((c = fgetc(md)) != EOF) fputc(c, stdout);
+			// write characters to stdout
+			char c;
+			while((c = fgetc(md)) != EOF) fputc(c, stdout);
 
-		pclose(md);
+			pclose(md);
 
-		return true;
+			return true;
+		}
 	}
 
 	// open file
