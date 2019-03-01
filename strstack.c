@@ -8,7 +8,7 @@
 //=======================================
 
 // init stack
-bool initsstack(strstack *ss)
+void initsstack(strstack *ss)
 {
 	ss->count = 0;
 	for(int i = 0; i < MAX_STACK; i++) ss->arr[i] = NULL; 

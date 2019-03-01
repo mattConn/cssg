@@ -18,7 +18,7 @@ typedef struct Strstack
 } strstack;
 
 // init stack
-bool initsstack(strstack *ss);
+void initsstack(strstack *ss);
 
 // push onto stack
 bool pushsstack(strstack *ss, char *str);

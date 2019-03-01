@@ -125,10 +125,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 					if(argnum <= fileargs->count && argnum > 0) // if num is within arg arr. bounds
 						printf("%s", fileargs->arr[argnum-1]);
 					else // bad arg/not an arg, print delim and current char
-					{
-						fprintf(stderr, "** WARNING: Argument delimiter `%c` found, but no valid argument followed.\n", '$');
 						printf("%c%c", '$',line[i]);
-					}
 					
 				}
 				else // no arg delim, print char

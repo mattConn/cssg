@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 					markdownp = argv[++i];
 				else
 				{
-					fprintf(stderr, "** ERROR: Missing markdown processor after flag.\n", argv[i]);
+					fprintf(stderr, "** ERROR: Missing markdown processor after flag.\n");
 					return 1;
 				}
 			}
