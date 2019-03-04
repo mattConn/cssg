@@ -4,6 +4,14 @@
 #include "global.h"
 #include "parsefile.h"
 
+#ifndef BUILD_DATE
+#define BUILD_DATE "unspecified date"
+#endif
+
+#ifndef VERSION
+#define VERSION "unspecified version"
+#endif
+
 int main(int argc, char *argv[])
 {
 	// if no args
@@ -25,25 +33,34 @@ int main(int argc, char *argv[])
 	for(; i < argc; i++)
 	{
 		// if flag is found
-		if(argv[i][0] == '-')	
+		if(argv[i][0] == '-' && strlen(argv[i])>1)
 		{
-			// markdown flag
-			if(strcmp(argv[i], "-m") == 0)
+			switch(argv[i][1])
 			{
-				// next in vector is markdown processor
-				if(i+1 < argc)
-					markdownp = argv[++i];
-				else
-				{
-					fprintf(stderr, "** ERROR: Missing markdown processor after flag.\n");
-					return 1;
-				}
-			}
-			else
-			{
+				// markdown flag
+				//--------------
+				case 'm':
+					// next in vector is markdown processor
+					if(i+1 < argc)
+						markdownp = argv[++i];
+					else
+					{
+						fprintf(stderr, "** ERROR: Missing markdown processor after flag.\n");
+						return 1;
+					}
+				break;
+
+				// print version info
+				//-------------------
+				case 'v':
+					printf("CSSG %s.\nBuilt on %s.\n", VERSION, BUILD_DATE);
+					return 0;
+				break;
+
 				// using undefined flag
-				fprintf(stderr, "** ERROR: Unrecognized flag `%s`.\n", argv[i]);
-				return 1;
+				default:
+					fprintf(stderr, "** ERROR: Unrecognized flag `%s`.\n", argv[i]);
+					return 1;
 			}
 		}
 		// treat non-flag as filepath

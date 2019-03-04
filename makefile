@@ -1,7 +1,6 @@
 CC = gcc
 BIN = cssg
-# no def. flags; pass as cli arg
-FLAGS = 
+FLAGS = -D VERSION=\"v0.1.1\" -D BUILD_DATE=\"$$(date +%m/%d/%Y)\"
 
 $(BIN) : main.c global.c parsefile.c strstack.c
 	$(CC) $^ $(FLAGS) -o $@
