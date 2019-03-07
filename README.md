@@ -56,6 +56,12 @@ Or, specify the path of the processor:
 $ cssg -m /usr/bin/pandoc path/to/file
 ```
 
+### Writing to a File
+By default, CSSG will write its results to stdout. You can specify another file to write to with the `-o` flag:
+```
+$ cssg path/to/file -o /output/file
+```
+
 ### Comments
 A line can be commented out by starting it with a `#` character:
 
