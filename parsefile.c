@@ -27,9 +27,9 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 
 			FILE *md = popen(mdcmd, "r");
 
-			// write characters to stdout
+			// write characters to outfile
 			char c;
-			while((c = fgetc(md)) != EOF) fputc(c, stdout);
+			while((c = fgetc(md)) != EOF) fputc(c, outfile);
 
 			pclose(md);
 
@@ -75,7 +75,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 			}
 			else
 			{
-				fprintf(stdout, "** ERROR: Include directive found but no file specified.\n");
+				fprintf(stderr, "** ERROR: Include directive found but no file specified.\n");
 				return false;
 			}
 
@@ -127,17 +127,20 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 				{
 					int argnum = line[++i] - '0';
 					if(argnum <= fileargs->count && argnum > 0) // if num is within arg arr. bounds
-						printf("%s", fileargs->arr[argnum-1]);
+						fputs(fileargs->arr[argnum-1], outfile);
 					else // bad arg/not an arg, print delim and current char
-						printf("%c%c", '$',line[i]);
+					{
+						fputc('$', outfile);
+						fputc(line[i], outfile);
+					}
 					
 				}
 				else // no arg delim, print char
-					printf("%c", line[i]);
+					fputc(line[i], outfile);
 			}
 		}
 		else
-			printf("%s", line); // no direcitve, just print
+			fputs(line, outfile); // no direcitve, just print
 	} // end getline routine
 
 	// cleanup

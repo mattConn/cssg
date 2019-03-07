@@ -24,6 +24,9 @@ int main(int argc, char *argv[])
 	// path of file to parse
 	char *filepath;
 
+	// output file
+	outfile = stdout;
+
 	// parse args
 	//===========
 
@@ -55,6 +58,25 @@ int main(int argc, char *argv[])
 				case 'v':
 					printf("CSSG %s.\nBuilt on %s.\n", VERSION, BUILD_DATE);
 					return 0;
+				break;
+
+				// specify output file
+				// -------------------
+				case 'o':
+					if(i+1 < argc)
+					{
+						outfile = fopen(argv[++i], "w");
+						if(!outfile)
+						{
+							fprintf(stderr, "** ERROR: Could not open outfile `%s`.\n", argv[i]);
+							return 1;
+						}
+					}
+					else
+					{
+						fprintf(stderr, "** ERROR: Missing outfile after flag.\n");
+						return 1;
+					}
 				break;
 
 				// using undefined flag
@@ -100,6 +122,9 @@ int main(int argc, char *argv[])
 	// uses strndup; must be freed
 	free(filedir);
 	free(basedir);
+
+	// if outfile was specified and opened
+	if(outfile != stdout) fclose(outfile);
 
 	return 0;
 }
