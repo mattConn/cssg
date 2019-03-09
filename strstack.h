@@ -18,12 +18,12 @@ typedef struct Strstack
 } strstack;
 
 // init stack
-void initsstack(strstack *ss);
+void initstack(strstack *ss);
 
 // push onto stack
-bool pushsstack(strstack *ss, char *str);
+bool pushstack(strstack *ss, char *str);
 
 // free all strings on heap
-void freesstack(strstack *ss);
+void freestack(strstack *ss);
 
 #endif

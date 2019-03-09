@@ -86,7 +86,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 			{
 				// dynamic string stack for file args
 				strstack argstack;
-				initsstack(&argstack);
+				initstack(&argstack);
 
 				// allocate mem. for delim. token
 				char *argDelim = (char *) malloc(strlen(tok) * sizeof(char));
@@ -96,7 +96,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 				while(tok) // store file args
 				{
 					if(tok[0] == ' ') tok++; // ignore single leading whitespace
-					pushsstack(&argstack, tok);
+					pushstack(&argstack, tok);
 					tok = strtok(NULL, argDelim);
 				}
 
@@ -105,7 +105,7 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 				parsefile(filename, &argstack);
 
 				// free dyn str stack
-				freesstack(&argstack);
+				freestack(&argstack);
 			}
 			else
 				parsefile(filename, NULL);

@@ -8,14 +8,14 @@
 //=======================================
 
 // init stack
-void initsstack(strstack *ss)
+void initstack(strstack *ss)
 {
 	ss->count = 0;
 	for(int i = 0; i < MAX_STACK; i++) ss->arr[i] = NULL; 
 }
 
 // push onto stack
-bool pushsstack(strstack *ss, char *str)
+bool pushstack(strstack *ss, char *str)
 {
 	if(ss->count < MAX_STACK)
 	{
@@ -32,7 +32,7 @@ bool pushsstack(strstack *ss, char *str)
 }
 
 // free all strings on heap
-void freesstack(strstack *ss)
+void freestack(strstack *ss)
 {
 	int i = 0;
 	while(ss->arr[i] != NULL && i < MAX_STACK)
