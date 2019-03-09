@@ -18,7 +18,7 @@ void changedir(const char *filepath);
 char *markdownp;
 
 // include directive
-char *directive;
+extern char *directive;
 
 // program output destination
 FILE *outfile;

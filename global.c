@@ -20,3 +20,5 @@ void changedir(const char *filepath)
 	if(chdir(filepath) < 0)
 		fprintf(stderr, "** ERROR: Could not change to directory `%s`.\n", filepath);
 }
+
+char *directive = "#include"; // define include directive

@@ -4,6 +4,7 @@
 #include "global.h"
 #include "parsefile.h"
 
+// specify build date and version for -v flag
 #ifndef BUILD_DATE
 #define BUILD_DATE "unspecified date"
 #endif
@@ -12,20 +13,35 @@
 #define VERSION "unspecified version"
 #endif
 
+/*
+main.c will do the following and aim to exit early at any error:
+
+initial definitions
+
+parse args
+
+handle file path (get directory and file name)
+
+parse file
+
+cleanup (free heap memory)
+*/
+
 int main(int argc, char *argv[])
 {
-	// if no args
+
+	// initial definitions
+	// ===================
+
+	// if no args, early exit
 	if(argc == 1)
 	{
 		fprintf(stderr, "** ERROR: Not enough arguments.\n");
 		return 1;
 	}
 
-	// path of file to parse
-	char *filepath;
-
-	// output file
-	outfile = stdout;
+	char *filepath; // path of file to parse
+	outfile = stdout; // output file
 
 	// parse args
 	//===========
@@ -79,7 +95,8 @@ int main(int argc, char *argv[])
 					}
 				break;
 
-				// using undefined flag
+				// using undefined flag, exit program
+				// ----------------------------------
 				default:
 					fprintf(stderr, "** ERROR: Unrecognized flag `%s`.\n", argv[i]);
 					return 1;
@@ -90,34 +107,27 @@ int main(int argc, char *argv[])
 			filepath = argv[i];
 	}
 
-	// ==============
-	// end parse args
+	// handle file path
+	// ================
 
-	// if no file arg
-	if(!filepath)
-	{
-		fprintf(stderr, "** ERROR: No filepath argument.\n");
-		return 1;
-	}
-
-	// if path contains directories, get file from path
+	// if path contains directories, get get directories path and change to it
 	char *filedir = getfiledir(filepath);
 	if(filedir) changedir(filedir);
 
-	// expand path
-	realpath(argv[0], cwd);
-
-	// set base directory
+	// set base directory to where program was called from 
+	realpath(argv[0], cwd); // expand path to absolute path
 	basedir = getfiledir(cwd);
 
-	// define include directive
-	directive = "#include";
-
 	// parse file
-	if(filedir)
+	// ==========
+
+	if(filedir) // if filepath contained directories
 		parsefile(strrchr(filepath, '/')+1, NULL); // open file by name at end of path
 	else
 		parsefile(filepath, NULL);
+
+	// cleanup
+	// =======
 
 	// uses strndup; must be freed
 	free(filedir);
