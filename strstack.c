@@ -11,6 +11,7 @@
 void initstack(strstack *ss)
 {
 	ss->count = 0;
+	ss->top = -1;
 	for(int i = 0; i < MAX_STACK; i++) ss->arr[i] = NULL; 
 }
 
@@ -21,7 +22,9 @@ bool pushstack(strstack *ss, char *str)
 	{
 		ss->arr[ss->count] = (char *) malloc(strlen(str) * sizeof(char));
 		strcpy(ss->arr[ss->count], str);
+
 		ss->count++;	
+		ss->top++;	
 
 		return true;
 	}

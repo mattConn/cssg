@@ -80,28 +80,22 @@ bool parsefile(const char *filepath, const strstack *fileargs)
 			}
 
 
-			tok = strtok(NULL, " "); // third tok.: arg. delim
+			tok = strtok(NULL, ","); // third tok.: first argument
 
-			if(tok) // if delim tok was found in line
+			if(tok) // if argument was found in line
 			{
 				// dynamic string stack for file args
 				strstack argstack;
 				initstack(&argstack);
 
-				// allocate mem. for delim. token
-				char *argDelim = (char *) malloc(strlen(tok) * sizeof(char));
-				strcpy(argDelim, tok);
-
-				tok = strtok(NULL, argDelim); // fourth tok.: first arg
 				while(tok) // store file args
 				{
 					if(tok[0] == ' ') tok++; // ignore single leading whitespace
 					pushstack(&argstack, tok);
-					tok = strtok(NULL, argDelim);
+					tok = strtok(NULL, ",");
 				}
 
-				free(argDelim); // frem delim. mem.
-
+				// parse file to be included
 				parsefile(filename, &argstack);
 
 				// free dyn str stack

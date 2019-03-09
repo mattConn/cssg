@@ -14,6 +14,7 @@ typedef struct Strstack
 {
 	char *arr[MAX_STACK];
 	int count;
+	int top;
 	
 } strstack;
 
