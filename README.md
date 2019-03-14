@@ -1,5 +1,5 @@
 # CSSG (C Static Site Generator)
-A static site generator and file manipulator for Linux and Mac. Concatenates files, inserts text, writes to files and more.
+A static site generator for Linux and Mac.
 
 ## Usage
 In your shell:
