@@ -1,3 +1,5 @@
+<img src="logo.png">
+
 # CSSG (C Static Site Generator)
 A static site generator for Linux and Mac.
 
